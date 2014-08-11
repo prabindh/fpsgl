@@ -1,0 +1,19 @@
+static gl_state myfps_gl;
+static GLuint fps_texture;
+
+
+//EGL initialisation should have been done before this
+void test_fps()
+{
+	//TEST FPS
+	glGenTextures(1, &fps_texture);
+	fps_init(&myfps_gl, fps_texture, MAX_TEXT_CHARS);
+	GL_CHECK(fps_init);
+	
+	//Draw fps and test
+	static int fps = 0;
+	if(fps > 99) fps = 0;
+	fps_draw_offscreen(fps++, &myfps_gl);
+	//draw fps onscreen now
+	fps_display_onscreen(&myfps_gl);
+}
