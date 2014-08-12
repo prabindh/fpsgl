@@ -34,6 +34,8 @@ typedef struct _gl_state
 	GLint yInvertLoc;
 	int digitCount;
 	GLint uniformOffsetLoc;
+	int screenWidthPix;
+	int screenHeightPix;
 }gl_state;
 
 //debug
@@ -51,8 +53,18 @@ printf("GL Error = %x for %s\n", err, (char*)(#x)); \
 #endif //DEBUG
 
 
-int fps_init(gl_state *fps_gl, GLuint textureID, int max_chars);
-void fps_display_onscreen(gl_state *fps_gl);
+typedef enum __fps_loc
+{
+	FPS_LOC_TOP_LEFT = 0,
+	FPS_LOC_TOP_RIGHT,
+	FPS_LOC_BOTTOM_LEFT,
+	FPS_LOC_BOTTOM_RIGHT
+}fps_loc;
+
+ 
+int fps_init(gl_state *fps_gl, GLuint textureID, int max_chars, int width, int height);
 int fps_draw_offscreen(int fps, gl_state *fps_gl);
+void fps_display_onscreen(gl_state *fps_gl, fps_loc loc);
 
 #endif //#ifndef __FPS_RENDERER_H
+
