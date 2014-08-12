@@ -27,7 +27,7 @@ void test_fps()
 {
 	//TEST FPS
 	glGenTextures(1, &fps_texture);
-	fps_init(&myfps_gl, fps_texture, MAX_TEXT_CHARS);
+	fps_init(&myfps_gl, fps_texture, MAX_TEXT_CHARS, 1280, 720);
 	GL_CHECK(fps_init);
 	
 	//Draw fps and test
@@ -35,5 +35,5 @@ void test_fps()
 	if(fps > 99) fps = 0;
 	fps_draw_offscreen(fps++, &myfps_gl);
 	//draw fps onscreen now
-	fps_display_onscreen(&myfps_gl);
+	fps_display_onscreen(&myfps_gl, FPS_LOC_TOP_RIGHT);
 }
